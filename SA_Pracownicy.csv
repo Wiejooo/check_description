@@ -1,0 +1,55 @@
+Uprawnienia Pracowników - Przywileje,,,,,,,,,,
+Etap,Nr,Identyfikator przypadku testowego/Tytuł/Podsumowanie,Komponent,Opis,Kroki przypadku testowego,Warunki wstępne/dane testowe,Oczekiwany rezultat przypadku testowego,Testowalne automatycznie,Nazwa pliku testowego,Rozdział ze specyfikacji
+,1,Pracownicy - Uprawnienia Pracowników - Przywileje,Pracownicy - Uprawnienia Pracowników - Przywileje,"Wejście na ekran ""Przywileje""","1. Operator loguje się do serwisu SA
+2. Operator wchodzi w ""Pracownicy"" 
+3. Operator rozwija listę ""Uprawnienia Pracowników""
+4. Operator wchodzi w ""Przywileje""",Operator ma aktywne usługi: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS,"System wyświetla ekran ""Przywileje"" z wyszukiwarką przywilejów",tak,test_01_PraUPP,
+,2,Pracownicy - Uprawnienia Pracowników - Przywileje - Wyszukiwarka,Pracownicy - Uprawnienia Pracowników - Przywileje,Wyszukanie przywilejów,"1. Operator loguje się do serwisu SA
+2. Operator wchodzi w ""Pracownicy"" 
+3. Operator rozwija listę ""Uprawnienia Pracowników""
+4. Operator wchodzi w ""Przywileje""
+5. Operator uzupełnia ""Czynność""
+6. Operator uzupełnia ""Modyfikator""
+7. Operator klika ""Szukaj""","W systemie są przywileje
+Operator ma aktywne usługi: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS","System wyświetla ekran ""Przywileje"" z wyszukiwarką przywilejów
+System wyświetla listę przywilejów spełniających kryteria wyszukiwania",tak,test_02_PraUPP_Wyszukiwarka,
+,3,Pracownicy - Uprawnienia Pracowników - Przywileje - Wyszukiwarka - Wyczyść,Pracownicy - Uprawnienia Pracowników - Przywileje,Wyczyszczenie pól w wyszukiwarce przywilejów,"1. Operator loguje się do serwisu SA
+2. Operator wchodzi w ""Pracownicy"" 
+3. Operator rozwija listę ""Uprawnienia Pracowników""
+4. Operator wchodzi w ""Przywileje""
+5. Operator uzupełnia ""Czynność""
+6. Operator uzupełnia ""Modyfikator""
+7. Operator klika ""Wyczyść""",Operator ma aktywne usługi: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS,"System wyświetla ekran ""Przywileje"" z wyszukiwarką przywilejów
+System czyści pola wyszukiwania wypełnione przez Operatora systemu",tak,test_03_PraUPP_WyszukiwarkaWyczysc,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
