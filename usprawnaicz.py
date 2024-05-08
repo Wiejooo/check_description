@@ -1,26 +1,9 @@
 import pandas as pd
+import importlib
 
+# mod = importlib.import_module("funkcje.test_01_PraUPP")
 
-# import inspect
-# import os
-
-# def find_functions(funkcje_dir):
-#     for filename in os.listdir(funkcje_dir):
-#         if filename.endswith('.py'):
-#             filepath = os.path.join(funkcje_dir, filename)
-#             with open(filepath, 'r') as f:
-#                 module_name = os.path.splitext(filename)[0]
-#                 module = __import__(f'funkcje.{module_name}', fromlist=[module_name])
-#                 for name, obj in inspect.getmembers(module):
-#                     if inspect.isfunction(obj):
-#                         yield name, obj
-
-# funkcje = list(find_functions('sprawdzOpis/funkcje'))
-# print(funkcje.__doc__)
-
-exec("funkcje/test_01_PraUPP.py", globals())
-funkcja = globals()['test_01_PraUPP']
-print(funkcja())
+# print(mod.test_01_PraUPP.__name__)
 
 def test_02_PraUPP_Wyszukiwarka():
 
@@ -79,12 +62,12 @@ def test_03_PraUPP_WyszukiwarkaWyczysc():
 
     """
 
-
-# test_01_PraUPP()
-
-df = pd.read_csv('IF-game/SA_Pracownicy.csv')
+# Wczytanie pliku CSV
+df = pd.read_csv('check_description/SA_Pracownicy.csv')
 
 def find_test_name(CSV):
+    """Zwraca listę testów"""
+
     # Przygotowanie zmiennych
     list_of_tests = []
     index = 0
@@ -116,14 +99,17 @@ def komponent_description(function):
 
 
 def final_check():
-    for index in range(0, len(find_test_name(df))):
+    list_of_tests = find_test_name(df)
+
+    for index in range(0, len(list_of_tests)):
+        mod = importlib.import_module(f"funkcje.{list_of_tests[index]}")
         # Sprawdzenie tytułu
-        title_in_csv = komponent_CSV(find_test_row(find_test_name(df)[index]))
-        title_in_description = komponent_description(eval(find_test_name(df)[index]))
+        title_in_csv = komponent_CSV(find_test_row(list_of_tests[index]))
+        title_in_description = komponent_description(eval(mod.list_of_tests[index]))
         if title_in_csv != title_in_description:
-            print(f'{find_test_name(df)[index]} - Występują różnice w tytule')
+            print(f'{list_of_tests[index]} - Występują różnice w tytule')
         else:
-            print(f'{find_test_name(df)[index]} - OK')
+            print(f'{list_of_tests[index]} - OK')
 
         # Sprawdzenie Warunków początkowych
 
@@ -131,8 +117,4 @@ def final_check():
 
         # Sprawdzenie oczekiwanego rezultatu
 
-# final_check()
-
-
-# print(type(test_01_PraUPP))
-# print(type(eval(find_test_name(df)[0])))
+final_check()
