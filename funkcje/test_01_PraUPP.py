@@ -5,7 +5,7 @@ def test_01_PraUPP():
 
     | **Tytuł:** Pracownicy - Uprawnienia Pracowników - Przywileje
 
-    | **Warunki początkowe:** Operator systemu posiada uprawnienia: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS.
+    | **Warunki początkowe:** Operator ma aktywne usługi: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS
 
     | **Kroki:**
 

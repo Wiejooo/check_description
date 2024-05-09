@@ -5,12 +5,12 @@ def test_02_PraUPP_Wyszukiwarka():
     |
     | **Przypadek testowy: 2**
 
-    | **Tytuł:** Pracownicy - Uprawnienia Pracowników - Przywileje - Wyszukiwarka
+    | **Tytuł:** Pracownicy - Uprawnienia Pracowników - Przywileje - Wyszukiwark a
 
     | **Warunki początkowe:**
 
     | 1. W systemie są przywileje.
-    | 2. Operator systemu posiada uprawnienia: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS.
+    | 2. Operator ma aktywne usługi: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS
 
     | **Kroki:**
 
