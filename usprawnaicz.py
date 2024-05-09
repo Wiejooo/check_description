@@ -1,10 +1,6 @@
 import pandas as pd
 import importlib
 
-# mod = importlib.import_module("funkcje.test_01_PraUPP")
-
-# print(mod.test_01_PraUPP.__name__)
-
 def test_02_PraUPP_Wyszukiwarka():
 
 
@@ -103,9 +99,10 @@ def final_check():
 
     for index in range(0, len(list_of_tests)):
         mod = importlib.import_module(f"funkcje.{list_of_tests[index]}")
+        my_fun = getattr(mod, f'{list_of_tests[index]}')
         # Sprawdzenie tytułu
         title_in_csv = komponent_CSV(find_test_row(list_of_tests[index]))
-        title_in_description = komponent_description(eval(mod.list_of_tests[index]))
+        title_in_description = komponent_description(my_fun)
         if title_in_csv != title_in_description:
             print(f'{list_of_tests[index]} - Występują różnice w tytule')
         else:
