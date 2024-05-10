@@ -5,7 +5,7 @@ def test_02_PraUPP_Wyszukiwarka():
     |
     | **Przypadek testowy: 2**
 
-    | **Tytuł:** Pracownicy - Uprawnienia Pracowników - Przywileje - Wyszukiwark a
+    | **Tytuł:** Pracownicy - Uprawnienia Pracowników - Przywileje - Wyszukiwarka
 
     | **Warunki początkowe:**
 
@@ -22,8 +22,8 @@ def test_02_PraUPP_Wyszukiwarka():
     | 6. Operator uzupełnia "Modyfikator"
     | 7. Operator klika "Szukaj"
 
-    | **Oczekiwany rezultat:** System wyświetla ekran "Przywileje" z wyszukiwarką przywilejów. System
-                                wyświetla listę przywilejów spełniających kryteria wyszukiwania.
+    | **Oczekiwany rezultat:** System wyświetla ekran "Przywileje" z wyszukiwarką przywilejów
+                               System wyświetla listę przywilejów spełniających kryteria wyszukiwania
 
     | **Warunki końcowe:** Ekran "Przywileje" z szukanymi rekordami.
 

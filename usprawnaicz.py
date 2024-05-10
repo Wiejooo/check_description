@@ -1,6 +1,7 @@
 import pandas as pd
 import importlib
 import re
+import os
 
 # Wczytanie pliku CSV
 df = pd.read_csv('check_description/SA_Pracownicy.csv')
@@ -26,26 +27,45 @@ def find_test_row(name):
     row_index = df[df.iloc[0:, 9]==name].index.values
     return int(row_index)
 
+def go_through_directories_recursively(directories_path):
+  for file_or_directory in os.listdir(directories_path):
+    path = os.path.join(directories_path, file_or_directory)
+    if os.path.isdir(path):
+      # Jest to katalog - rekursywnie przejdź po nim
+      yield from go_through_directories_recursively(path)
+    else:
+      # Jest to plik - zwróć ścieżkę do pliku
+      yield path
+
+# for sciezka in go_through_directories_recursively('./check_description/funkcje'):
+#   path_function = sciezka.split('\\')[:-1]
+#   delete_first_path = path_function[0][20:]
+#   path_function[0] = delete_first_path
+#   path_function = '/'.join(path_function).replace('/', '.')
+#   my_function = sciezka.split("\\")[-1][:-3]
+#   print(path_function)
+#   print(my_function)
+
 # === Funkcje wyciągające dane z CSV ===
 def number_CSV(row):
     # Zwrócenie wartości komórki Nr
     return df.iloc[row, 1]
 
 def title_CSV(row):
-    # Zwrócenie wartości komórki Komponent
-    return df.iloc[row, 3]
+    # Zwrócenie wartości komórki Tytuł
+    return df.iloc[row, 2]
 
 def prerequisites_CSV(row):
     # Zwrócenie wartości komórki Warunki wstępne oraz usunięcie \n
     return ' '.join(df.iloc[row, 6].split())
 
 def steps_CSV(row):
-    # Zwrócenie wartości komórki Kroki przypadku testowego
-    return df.iloc[row, 5]
+    # Zwrócenie wartości komórki Kroki przypadku testowego oraz usunięcie \n
+    return ' '.join(df.iloc[row, 5].split())
 
 def results_CSV(row):
-    # Zwrócenie wartości komórki Oczekiwany rezultat przypadku testowego
-    return df.iloc[row, 7]
+    # Zwrócenie wartości komórki Oczekiwany rezultat przypadku testowego oraz usunięcie \n
+    return ' '.join(df.iloc[row, 7].split())
 
 # === Funkcje wyciągające dane z opisu testów ===
 def number_description(function):
@@ -82,12 +102,16 @@ def prerequisites_description(function):
 
 def steps_description(function):
     """Zwraca z opisu kroki"""
+    # Wyodrębnienie odpowiedniej zawartości
     make_list = function.__doc__.split()
     start = make_list.index('**Kroki:**')
     make_list = make_list[start + 1:]
     end = make_list.index('**Oczekiwany')
-    make_list = make_list[:end - 1]
-    return ' '.join(make_list)
+    make_list = ' '.join(make_list[:end - 1])
+
+    # Formatowanie
+    make_list = make_list.replace(" |", "")[2:]
+    return make_list
 
 def results_description(function):
     """Zwraca z opisu oczekiwany rezultat"""
@@ -102,9 +126,18 @@ def final_check():
     list_of_tests = find_test_name(df)
 
     for index in range(0, len(list_of_tests)):
-        mod = importlib.import_module(f"funkcje.{list_of_tests[index]}")
+        # Wyszukanie ścieżki do funkcji
+        for sciezka in go_through_directories_recursively('./check_description/funkcje'):
+            path_function = sciezka.split('\\')[:-1]
+            delete_first_path = path_function[0][20:]
+            path_function[0] = delete_first_path
+            path_function = '/'.join(path_function).replace('/', '.')
+            my_function = sciezka.split("\\")[-1][:-3]
+            if my_function == list_of_tests[index]:
+                mod = importlib.import_module(f"{path_function}.{list_of_tests[index]}")
         my_fun = getattr(mod, f'{list_of_tests[index]}')
         error = False
+
         # Sprawdzenie Przypadku testowego
         number_in_csv = number_CSV(find_test_row(list_of_tests[index]))
         number_in_description = number_description(my_fun)
@@ -127,20 +160,35 @@ def final_check():
             error = True
 
         # Sprawdzenie Kroków
+        steps_in_csv = steps_CSV(find_test_row(list_of_tests[index]))
+        steps_in_description = steps_description(my_fun)
+        if steps_in_csv != steps_in_description:
+            print(f'{list_of_tests[index]} - Występują różnice w krokach')
+            error = True
 
         # Sprawdzenie Oczekiwanego Rezultatu
+        results_in_csv = results_CSV(find_test_row(list_of_tests[index]))
+        results_in_description = results_description(my_fun)
+        if results_in_csv != results_in_description:
+            print(f'{list_of_tests[index]} - Występują różnice w oczekiwanym rezultacie')
+            error = True
 
         if not error:
             print(f'{list_of_tests[index]} - OK')
 
 final_check()
 
-# mod = importlib.import_module(f"funkcje.{find_test_name(df)[1]}")
-# my_fun = getattr(mod, f'{find_test_name(df)[1]}')
-# prerequisites_in_csv = prerequisites_CSV(find_test_row(find_test_name(df)[1]))
-# prerequisites_in_description = prerequisites_description(my_fun)
+
+# Sprawdzanie
+# mod = importlib.import_module(f"funkcje.{find_test_name(df)[0]}")
+# my_fun = getattr(mod, f'{find_test_name(df)[2]}')
+# prerequisites_in_csv = title_CSV(find_test_row(find_test_name(df)[2]))
+# prerequisites_in_description = title_description(my_fun)
 # print()
 # print(prerequisites_in_csv)
 # print()
 # print(prerequisites_in_description)
 # print()
+
+
+

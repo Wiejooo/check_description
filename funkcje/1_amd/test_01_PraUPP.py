@@ -14,7 +14,7 @@ def test_01_PraUPP():
     | 3. Operator rozwija listę "Uprawnienia Pracowników"
     | 4. Operator wchodzi w "Przywileje"
 
-    | **Oczekiwany rezultat:** System wyświetla ekran "Przywileje" z wyszukiwarką przywilejów.
+    | **Oczekiwany rezultat:** System wyświetla ekran "Przywileje" z wyszukiwarką przywilejów
 
     | **Warunki końcowe:** Ekran "Przywileje".
 
