@@ -1,5 +1,6 @@
 import pandas as pd
 import importlib
+import re
 
 # Wczytanie pliku CSV
 df = pd.read_csv('check_description/SA_Pracownicy.csv')
@@ -73,10 +74,10 @@ def prerequisites_description(function):
     make_list = make_list[start + 1:]
     end = make_list.index('**Kroki:**')
     make_list = ' '.join(make_list[:end - 1])
-
-    # Formatowanie. Usunięcie numeracji
-    make_list = make_list.replace("|", "")
-    #TODO Dokończ czyszczenie stringa
+    # Formatowanie. Usunięcie numeracji jeśli istnieje
+    if make_list[0] == "|":
+        make_list = make_list.replace("|", "")
+        make_list = re.sub(r"\s*\d+\.", "", make_list)[1:]
     return  make_list
 
 def steps_description(function):
@@ -121,8 +122,6 @@ def final_check():
         # Sprawdzenie Warunków początkowych
         prerequisites_in_csv = prerequisites_CSV(find_test_row(list_of_tests[index]))
         prerequisites_in_description = prerequisites_description(my_fun)
-        print('TU ' + prerequisites_in_csv)
-        print(prerequisites_in_description)
         if prerequisites_in_csv != prerequisites_in_description:
             print(f'{list_of_tests[index]} - Występują różnice w warunkach początkowych')
             error = True
@@ -134,14 +133,14 @@ def final_check():
         if not error:
             print(f'{list_of_tests[index]} - OK')
 
-# final_check()
+final_check()
 
-mod = importlib.import_module(f"funkcje.{find_test_name(df)[1]}")
-my_fun = getattr(mod, f'{find_test_name(df)[1]}')
-prerequisites_in_csv = prerequisites_CSV(find_test_row(find_test_name(df)[1]))
-prerequisites_in_description = prerequisites_description(my_fun)
-print()
-print(prerequisites_in_csv)
-print()
-print(prerequisites_in_description)
-print()
+# mod = importlib.import_module(f"funkcje.{find_test_name(df)[1]}")
+# my_fun = getattr(mod, f'{find_test_name(df)[1]}')
+# prerequisites_in_csv = prerequisites_CSV(find_test_row(find_test_name(df)[1]))
+# prerequisites_in_description = prerequisites_description(my_fun)
+# print()
+# print(prerequisites_in_csv)
+# print()
+# print(prerequisites_in_description)
+# print()

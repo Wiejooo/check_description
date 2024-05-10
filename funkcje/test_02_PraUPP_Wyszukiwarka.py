@@ -9,7 +9,7 @@ def test_02_PraUPP_Wyszukiwarka():
 
     | **Warunki początkowe:**
 
-    | 1. W systemie są przywileje.
+    | 1. W systemie są przywileje
     | 2. Operator ma aktywne usługi: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS
 
     | **Kroki:**

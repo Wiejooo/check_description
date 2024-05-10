@@ -5,7 +5,7 @@ def test_03_PraUPP_WyszukiwarkaWyczysc():
 
     | **Tytuł:** Pracownicy - Uprawnienia Pracownikow - Przywileje - Wyszukiwarka - Wyczyść
 
-    | **Warunki początkowe:** Operator systemu posiada uprawnienia: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS.
+    | **Warunki początkowe:** Operator ma aktywne usługi: SA-EMPLOYEE-PRIVILEGES-LIST:ACCESS
 
     | **Kroki:**
 
