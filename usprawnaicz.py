@@ -43,7 +43,7 @@ def steps_CSV(row):
     return df.iloc[row, 5]
 
 def results_CSV(row):
-    # Zwrócenie wartości komórki Oczekwiany rezultat przypadku testowego
+    # Zwrócenie wartości komórki Oczekiwany rezultat przypadku testowego
     return df.iloc[row, 7]
 
 # === Funkcje wyciągające dane z opisu testów ===
@@ -131,7 +131,7 @@ def final_check():
 
         # Sprawdzenie Oczekiwanego Rezultatu
 
-        if error == False:
+        if not error:
             print(f'{list_of_tests[index]} - OK')
 
 # final_check()
